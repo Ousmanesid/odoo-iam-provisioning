@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Données de démonstration pour les agences -->
+    <record id="demo_agency_1" model="agency.manager">
+        <field name="name">Voyages Paris Circuit</field>
+        <field name="siret">12345678901234</field>
+        <field name="date_creation">2023-01-15</field>
+        <field name="owner_firstname">Marie</field>
+        <field name="owner_lastname">Dubois</field>
+        <field name="owner_birthdate">1985-03-20</field>
+        <field name="owner_birthplace">Paris</field>
+        <field name="capital">50000.00</field>
+    </record>
+
+    <record id="demo_agency_2" model="agency.manager">
+        <field name="name">Lyon Adventure Tours</field>
+        <field name="siret">98765432109876</field>
+        <field name="date_creation">2022-09-10</field>
+        <field name="owner_firstname">Pierre</field>
+        <field name="owner_lastname">Martin</field>
+        <field name="owner_birthdate">1978-11-05</field>
+        <field name="owner_birthplace">Lyon</field>
+        <field name="capital">75000.00</field>
+    </record>
+
+    <!-- Accompagnateurs de démonstration -->
+    <record id="demo_guide_1" model="res.partner">
+        <field name="name">Sophie Lefevre</field>
+        <field name="email">sophie.lefevre@ubercircuit.com</field>
+        <field name="phone">+33 6 12 34 56 78</field>
+        <field name="is_guide">True</field>
+        <field name="skills">Guide touristique expérimentée, spécialisée en histoire de France et monuments parisiens. Parle couramment anglais, espagnol et italien.</field>
+        <field name="availability_start">2024-01-01</field>
+        <field name="availability_end">2024-12-31</field>
+        <field name="hourly_rate">45.00</field>
+    </record>
+
+    <record id="demo_guide_2" model="res.partner">
+        <field name="name">Thomas Rousseau</field>
+        <field name="email">thomas.rousseau@ubercircuit.com</field>
+        <field name="phone">+33 6 98 76 54 32</field>
+        <field name="is_guide">True</field>
+        <field name="skills">Accompagnateur nature et randonnées, expert en faune et flore alpine. Certifié premiers secours.</field>
+        <field name="availability_start">2024-03-01</field>
+        <field name="availability_end">2024-10-31</field>
+        <field name="hourly_rate">55.00</field>
+    </record>
+
+    <record id="demo_guide_3" model="res.partner">
+        <field name="name">Isabelle Moreau</field>
+        <field name="email">isabelle.moreau@ubercircuit.com</field>
+        <field name="phone">+33 6 11 22 33 44</field>
+        <field name="is_guide">True</field>
+        <field name="skills">Guide culturelle spécialisée en art et gastronomie française. Connaissance approfondie des vignobles et terroirs.</field>
+        <field name="availability_start">2024-02-01</field>
+        <field name="availability_end">2024-11-30</field>
+        <field name="hourly_rate">50.00</field>
+    </record>
+
+    <!-- Circuits de démonstration -->
+    <record id="demo_circuit_1" model="agency.circuit">
+        <field name="circuit_id">PAR001</field>
+        <field name="name">Paris Historique - 3 jours</field>
+        <field name="agency_id" ref="demo_agency_1"/>
+        <field name="start_date">2024-06-01</field>
+        <field name="end_date">2024-06-03</field>
+        <field name="description">Découverte des monuments historiques de Paris : Notre-Dame, Louvre, Champs-Élysées, Tour Eiffel. Visite guidée avec dégustation gastronomique.</field>
+        <field name="price">350.00</field>
+        <field name="max_participants">25</field>
+        <field name="guide_id" ref="demo_guide_1"/>
+    </record>
+
+    <record id="demo_circuit_2" model="agency.circuit">
+        <field name="circuit_id">LYO001</field>
+        <field name="name">Alpes & Nature - 5 jours</field>
+        <field name="agency_id" ref="demo_agency_2"/>
+        <field name="start_date">2024-07-15</field>
+        <field name="end_date">2024-07-19</field>
+        <field name="description">Randonnées dans les Alpes françaises avec découverte de la faune et flore locales. Hébergement en refuges de montagne.</field>
+        <field name="price">680.00</field>
+        <field name="max_participants">15</field>
+        <field name="guide_id" ref="demo_guide_2"/>
+    </record>
+
+    <record id="demo_circuit_3" model="agency.circuit">
+        <field name="circuit_id">PAR002</field>
+        <field name="name">Paris Gourmand - 2 jours</field>
+        <field name="agency_id" ref="demo_agency_1"/>
+        <field name="start_date">2024-08-10</field>
+        <field name="end_date">2024-08-11</field>
+        <field name="description">Circuit gastronomique parisien avec visite de marchés, ateliers cuisine et dégustation dans les meilleures brasseries.</field>
+        <field name="price">280.00</field>
+        <field name="max_participants">20</field>
+        <field name="guide_id" ref="demo_guide_3"/>
+    </record>
+
+    <record id="demo_circuit_4" model="agency.circuit">
+        <field name="circuit_id">LYO002</field>
+        <field name="name">Beaujolais & Vignobles - 4 jours</field>
+        <field name="agency_id" ref="demo_agency_2"/>
+        <field name="start_date">2024-09-20</field>
+        <field name="end_date">2024-09-23</field>
+        <field name="description">Découverte des vignobles du Beaujolais avec dégustations, visite de caves et rencontre avec les vignerons locaux.</field>
+        <field name="price">520.00</field>
+        <field name="max_participants">18</field>
+        <field name="guide_id" ref="demo_guide_3"/>
+    </record>
+</odoo> 

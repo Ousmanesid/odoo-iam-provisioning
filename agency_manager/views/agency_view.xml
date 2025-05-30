@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire des agences -->
+    <record id="view_agency_form" model="ir.ui.view">
+        <field name="name">agency.manager.form</field>
+        <field name="model">agency.manager</field>
+        <field name="arch" type="xml">
+            <form string="Agence Uber Circuit Entreprise Individuelle">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_guides" type="object" class="oe_stat_button" icon="fa-users">
+                            <field name="guide_count" widget="statinfo" string="Accompagnateurs"/>
+                        </button>
+                        <button name="action_view_circuits" type="object" class="oe_stat_button" icon="fa-map">
+                            <field name="circuit_count" widget="statinfo" string="Circuits"/>
+                        </button>
+                    </div>
+                    
+                    <group>
+                        <group string="Informations de l'agence">
+                            <field name="name"/>
+                            <field name="siret"/>
+                            <field name="date_creation"/>
+                            <field name="capital"/>
+                        </group>
+                        <group string="Propriétaire">
+                            <field name="owner_firstname"/>
+                            <field name="owner_lastname"/>
+                            <field name="owner_birthdate"/>
+                            <field name="owner_birthplace"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Accompagnateurs">
+                            <field name="guide_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="email"/>
+                                    <field name="phone"/>
+                                    <field name="hourly_rate"/>
+                                    <field name="availability_start"/>
+                                    <field name="availability_end"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Circuits">
+                            <field name="circuit_ids">
+                                <tree>
+                                    <field name="circuit_id"/>
+                                    <field name="name"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                    <field name="price"/>
+                                    <field name="guide_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste des agences -->
+    <record id="view_agency_tree" model="ir.ui.view">
+        <field name="name">agency.manager.tree</field>
+        <field name="model">agency.manager</field>
+        <field name="arch" type="xml">
+            <tree string="Agences">
+                <field name="name"/>
+                <field name="siret"/>
+                <field name="date_creation"/>
+                <field name="capital"/>
+                <field name="guide_count"/>
+                <field name="circuit_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action pour les agences -->
+    <record id="action_agency_manager" model="ir.actions.act_window">
+        <field name="name">Agences Entreprises Individuelles</field>
+        <field name="res_model">agency.manager</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Vue formulaire des circuits -->
+    <record id="view_circuit_form" model="ir.ui.view">
+        <field name="name">agency.circuit.form</field>
+        <field name="model">agency.circuit</field>
+        <field name="arch" type="xml">
+            <form string="Circuit">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="circuit_id"/>
+                            <field name="name"/>
+                            <field name="agency_id"/>
+                            <field name="guide_id"/>
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="price"/>
+                            <field name="max_participants"/>
+                        </group>
+                    </group>
+                    <group string="Description">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste des circuits -->
+    <record id="view_circuit_tree" model="ir.ui.view">
+        <field name="name">agency.circuit.tree</field>
+        <field name="model">agency.circuit</field>
+        <field name="arch" type="xml">
+            <tree string="Circuits">
+                <field name="circuit_id"/>
+                <field name="name"/>
+                <field name="agency_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="price"/>
+                <field name="guide_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action pour les circuits -->
+    <record id="action_agency_circuit" model="ir.actions.act_window">
+        <field name="name">Circuits</field>
+        <field name="res_model">agency.circuit</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Vue formulaire étendue des partenaires/accompagnateurs -->
+    <record id="view_partner_guide_form" model="ir.ui.view">
+        <field name="name">res.partner.guide.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <page name="internal_notes" position="after">
+                <page string="Accompagnateur" attrs="{'invisible': [('is_guide', '=', False)]}">
+                    <group>
+                        <field name="is_guide"/>
+                        <field name="hourly_rate" attrs="{'invisible': [('is_guide', '=', False)]}"/>
+                    </group>
+                    <group string="Disponibilités" attrs="{'invisible': [('is_guide', '=', False)]}">
+                        <field name="availability_start"/>
+                        <field name="availability_end"/>
+                    </group>
+                    <group string="Compétences" attrs="{'invisible': [('is_guide', '=', False)]}">
+                        <field name="skills" nolabel="1"/>
+                    </group>
+                    <group string="Agences partenaires" attrs="{'invisible': [('is_guide', '=', False)]}">
+                        <field name="agency_ids" nolabel="1">
+                            <tree>
+                                <field name="name"/>
+                                <field name="siret"/>
+                                <field name="owner_firstname"/>
+                                <field name="owner_lastname"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <!-- Action pour les accompagnateurs -->
+    <record id="action_guides" model="ir.actions.act_window">
+        <field name="name">Accompagnateurs</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_guide', '=', True)]</field>
+        <field name="context">{'default_is_guide': True}</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="agency_menu_root" name="Agences UberCircuit" sequence="1"/>
+    
+    <menuitem id="agency_menu" name="Gestion des Agences" parent="agency_menu_root"/>
+    
+    <menuitem id="menu_agency_manager" name="Agences Entreprises Individuelles"
+        parent="agency_menu" action="action_agency_manager"/>
+
+    <menuitem id="menu_agency_circuits" name="Circuits"
+        parent="agency_menu" action="action_agency_circuit"/>
+
+    <menuitem id="menu_guides" name="Accompagnateurs"
+        parent="agency_menu" action="action_guides"/>
+</odoo> 
